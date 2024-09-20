@@ -6,10 +6,9 @@ State your app
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
-Hi, my name is David Antee.
-Hi, my name is Fereshteh Aghaarabi
-* ...
-* ...
+* Hi, my name is David Anstee.
+* Hi, my name is Fereshteh.
+* Hi, my name is Majid.
 	
 ## 3. Technologies and Resources Used
 
