@@ -21,6 +21,11 @@
     color: #F0E7D8;
     /* Cinereous for brand name & nav links for visibility */
 }
+.container-fluid {
+    background-color: #A63A50;    
+    border-color: #AB9B96;
+    color: #F0E7D8;
+}
 
 .btn-info {
     color: #F0E7D8;
