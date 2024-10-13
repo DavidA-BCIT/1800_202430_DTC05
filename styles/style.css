@@ -1,1 +1,52 @@
+/*
+* --------------------------------------------
+* Custom styles to override the default Bootstrap ones
+* --------------------------------------------
+*/
 
+/* New Color Palette:
+* Antique white (Primary):        #F0E7D8
+* Amaranth purple (Secondary):        #A63A50      (canvas background)
+* Cinereous (Accent):               #AB9B96
+*/
+.bg-info {
+    background-color: #AB9B96 !important;
+    /* Amaranth purple for secondary backgrounds */
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    background-color: #A63A50;    
+    border-color: #AB9B96;
+    color: #F0E7D8;
+    /* Cinereous for brand name & nav links for visibility */
+}
+
+.btn-info {
+    color: #F0E7D8;
+    /* Antique white for text on info button for contrast */
+    background-color: #A63A50;
+    /* Amaranth purple for button background */
+    border-color: #AB9B96;
+    /* Cinereous for button border */
+}
+
+.btn-primary {
+    color: #F0E7D8;
+    /* Antique white for text */
+    font-size: 150%;
+    background-color: #A63A50;
+    /* Amaranth purple for primary button background */
+    border-color: #AB9B96;
+    /* Cinereous for border to use as accent */
+    border-width: thick;
+}
+
+body {
+    background-color: #F0E7D8;
+}
+
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.25rem;
+}
