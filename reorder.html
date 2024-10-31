@@ -27,6 +27,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Other libraries go here -->
+    <!-- JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Reordering -->
+    <script src="scripts/reorder.js" defer></script>
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
@@ -34,8 +39,32 @@
 </head>
 
 <body>
+    <!-- Reorder Menu -->
+    <div class="flex flex-row">
+        <h3>Sort by: </h3>
+        <button id="sort-assignDate">Start date</button>
+        <button id="sort-dueDate">Due date</button>
+        <button id="sort-course">Course</button>
+    </div>
+    <!-- Card containter -->
+    <div class="container pt-4" id="card-container">
 
+    </div>
 
+    <!-- Templates -->
+    <template id="card-template">
+        <div class="card m-2">
+            <div class="card-body">
+                <h3 class="card-title">Assignment 1 - Lorem, ipsum dolor.</h3>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At magni et repellat
+                    commodi
+                    perspiciatis, consequuntur deserunt quo eveniet harum iste, vitae consectetur obcaecati nam rem
+                    enim
+                    vero. Quia, dolorem quaerat.</p>
+                <a href="#" class="btn btn-primary btn-sm">Lorem?</a>
+            </div>
+        </div>
+    </template>
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
