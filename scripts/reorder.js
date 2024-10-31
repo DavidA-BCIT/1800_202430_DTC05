@@ -25,6 +25,8 @@ function createExamples() {
     addCard(createCardData("Assignment 1", "COMP-1800", "2024-09-23", "2024-09-30"));
     addCard(createCardData("Lab 2", "COMP-1537", "2024-10-09", "2024-10-16"));
     addCard(createCardData("Quiz 3", "COMP-1510", "2024-11-30", "2024-11-30"));
+    addCard(createCardData("Term Project", "COMP-1712", "2024-10-20", "2024-12-02"));
+    addCard(createCardData("Demo 1", "COMP-1800", "2024-09-20", "2024-10-01"));
 }
 
 function populateCards() {
