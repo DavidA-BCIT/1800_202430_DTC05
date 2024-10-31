@@ -9,26 +9,49 @@
 * Amaranth purple (Secondary):        #A63A50      (canvas background)
 * Cinereous (Accent):               #AB9B96
 */
+.bg-amaranth {
+    background-color: #A63A50;
+    /* Force amaranth purple as background */
+}
+
+.bg-antique {
+    background-color: #F0E7D8;
+    /* Force antique white as background */
+}
+
+.bg-cinereous {
+    background-color: #AB9B96;
+    /* Force cinereous as background */
+}
+
+.text-antique {
+    color: #F0E7D8;
+    /* Force antique white as background */
+}
+
 .bg-info {
     background-color: #AB9B96 !important;
     /* Amaranth purple for secondary backgrounds */
 }
+
 .bg-colour_secondary {
     background-color: #A63A50;
 }
+
 .text-colour_secondary {
     color: #A63A50
 }
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
-    background-color: #A63A50;    
+    background-color: #A63A50;
     border-color: #AB9B96;
     color: #F0E7D8;
     /* Cinereous for brand name & nav links for visibility */
 }
+
 .container-fluid {
-    background-color: #A63A50;    
+    background-color: #A63A50;
     border-color: #AB9B96;
     color: #F0E7D8;
 }
@@ -55,6 +78,18 @@
 
 body {
     background-color: #F0E7D8;
+}
+
+.card {
+    border-color: #AB9B96;
+    background-color: #A63A50;
+    color: #F0E7D8;
+}
+
+.card-body {
+    border-color: #AB9B96;
+    background-color: #F0E7D8;
+    color: black;
 }
 
 .navbar-brand {
