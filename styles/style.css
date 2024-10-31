@@ -80,6 +80,18 @@ body {
     background-color: #F0E7D8;
 }
 
+.card {
+    border-color: #AB9B96;
+    background-color: #A63A50;
+    color: #F0E7D8;
+}
+
+.card-body {
+    border-color: #AB9B96;
+    background-color: #F0E7D8;
+    color: black;
+}
+
 .navbar-brand {
     font-family: 'Roboto', sans-serif;
     font-size: 2.25rem;
