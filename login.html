@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>DTC-05 Landing Page</title>
+    <title>Login or register</title>
     <meta name="comp1800 template" content="My 1800 App">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Bootstrap Library CSS CDN go here -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -25,7 +25,7 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    
+
     <!-- Other libraries go here -->
 
     <!-- Link to styles of your own -->
@@ -33,7 +33,7 @@
 
 </head>
 
-<body>
+<body class="">
     <!---------------------->
     <!-- Your HTML layout -->
     <!--------------------->
@@ -43,9 +43,16 @@
 
     <!-- Your body of your page -->
 
-    <div class="container">
-        <h1>Let's Login!</h1>
+    <div class="text-center">
+        <h1 class="container-fluid p-2"> Login or register</h1>
+        <p class="lead"><span class="fw-bold">Enter your email below. </span>If your email is not associated with an
+            account, you will be
+            prompted
+            to
+            create an
+            account.</p>
     </div>
+
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
 
