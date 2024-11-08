@@ -1,4 +1,11 @@
-const tags = ["Quiz", "Lab"];
+var local_tags = ["Quiz", "Lab", "example_tag", "my_tag", "firestore_tag"];
+db.collection("cards").doc("all_tags").get("tags")
+    .then(doc => {
+        console.log(doc);
+
+        local_tags = doc.data().tags;
+    });
+console.log(local_tags);
 
 const cardDataTemplate = {
     title: "template",
@@ -30,7 +37,7 @@ function createCardFromData(data) {
     newCard_elem.find(".card-assign-date").text(data.assignDate);
     newCard_elem.find(".card-due-date").text(data.dueDate);
     newCard_elem.find(".card-id").text(data.id);
-    tags.forEach(function (tag) {
+    local_tags.forEach(function (tag) {
         let tag_entry = `<li><button class="tag-item dropdown-item `;
         if (data.cardTags.includes(tag)) { tag_entry += `fw-semibold bg-greyed-out`; console.log("cringe") };
         tag_entry += `">` + tag + `</button></li>`;
@@ -50,7 +57,7 @@ function createExamples() {
 
 function openTags(event) {
     let tagList = "";
-    tags.forEach(function (item) {
+    local_tags.forEach(function (item) {
         tagList += `<button class="dropdown-item" type="button">` + item + `</button>`;
     });
     tagList += `<div class="dropdown-divider"></div> <button onClick="prompt_new_tag()" class="dropdown-item" type="button">Create new</button>`
@@ -70,17 +77,23 @@ function openTags(event) {
 function validate_tag(tag) {
     if (tag == "") return 1;
     if (tag == null) return 2;
-    for (let i = 0; i < tags.length; ++i) {
-        if (tag.toLowerCase() == tags[i].toLowerCase()) return 3;
+    for (let i = 0; i < local_tags.length; ++i) {
+        if (tag.toLowerCase() == local_tags[i].toLowerCase()) return 3;
     }
     return 0;
+}
+
+function add_tag(user_tag) {
+    local_tags.push(user_tag);
+    db.collection("cards").doc("all_tags").set({ tags: local_tags })
+    update_tags();
 }
 
 function update_tags() {
     $(".dynamic-tags").each(function () {
         const tag_list = $(this);
         tag_list.empty();
-        tags.forEach(function (tag) {
+        local_tags.forEach(function (tag) {
             let tag_entry = `<li><button class="tag-item dropdown-item `;
             if (tag_list.closest(".card").data("cardData").cardTags.includes(tag)) tag_entry += `fw-semibold bg-greyed-out`;
             tag_entry += `">` + tag + `</button></li>`;
@@ -95,8 +108,7 @@ function prompt_new_tag() {
     let user_tag = window.prompt("Enter new tag:", "");
     let valid = validate_tag(user_tag);
     if (valid == 0) {
-        tags.push(user_tag);
-        update_tags();
+        add_tag(user_tag);
     }
     else if (valid == 1) { window.alert("No tag entered!"); }
     else if (valid == 3) { window.alert("Tag already exists!") }
