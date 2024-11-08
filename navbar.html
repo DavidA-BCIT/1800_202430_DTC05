@@ -76,23 +76,7 @@
         <a href="notification.html"><i class="fas fa-bell text-2xl"></i></a>
     </nav>
 
-    <script>
-        // JavaScript to toggle menu visibility
-        document.getElementById('menuButton').addEventListener('click', () => {
-            const menu = document.getElementById('menu');
-            // Toggle the display of the menu
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Optional: Close the menu if clicked outside
-        document.addEventListener('click', (e) => {
-            const menu = document.getElementById('menu');
-            const menuButton = document.getElementById('menuButton');
-            if (!menu.contains(e.target) && !menuButton.contains(e.target)) {
-                menu.style.display = 'none';
-            }
-        });
-    </script>
+    <div id="result"></div>
 
 </body>
 
