@@ -31,72 +31,51 @@
 <body class="">
     <!-- Demo -->
     <h1 class="bg-amaranth text-antique p-2 text-center mb-0">This page demonstrates the tagging feature</h1>
-
-    <!--Cards-->
-    <div class="container pt-4">
-        <div class="card m-2 p-1">
-            <div class="d-flex flex-row justify-content-between">
-                <h4 class="text-antique fw-bold px-2">COMP-1510</h4>
-                <button class="btn btn-secondary tag-list bg-cinereous border-0 mb-1">
-                    Tags
-                </button>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">Assignment 1 - Lorem, ipsum dolor.</h3>
-                <hr>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At magni et repellat
-                    commodi
-                    perspiciatis, consequuntur deserunt quo eveniet harum iste, vitae consectetur obcaecati nam rem
-                    enim
-                    vero. Quia, dolorem quaerat.</p>
-                <a href="#" class="btn btn-primary btn-sm">Lorem?</a>
-            </div>
-        </div>
-        <div class="card m-2 p-1">
-            <div class="d-flex flex-row justify-content-between">
-                <h4 class="text-antique fw-bold px-2">COMP-1800</h4>
-                <button class="btn btn-secondary tag-list bg-cinereous border-0 mb-1">
-                    Tags
-                </button>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">Lab 2 - Lorem, ipsum.</h3>
-                <hr>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At magni et
-                    repellat
-                    commodi
-                    perspiciatis, consequuntur deserunt quo eveniet harum iste, vitae consectetur obcaecati nam
-                    rem
-                    enim
-                    vero. Quia, dolorem quaerat.</p>
-                <a href="#" class="btn btn-primary btn-sm">Lorem?</a>
-            </div>
-        </div>
-
-        <div class="card m-2 p-1">
-            <div class="d-flex flex-row justify-content-between">
-                <h4 class="text-antique fw-bold px-2">COMP-1712</h4>
-                <button class="btn btn-secondary tag-list bg-cinereous border-0 mb-1">
-                    Tags
-                </button>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">Quiz 4 - Lorem, ipsum.</h3>
-                <hr>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At magni et
-                    repellat
-                    commodi
-                    perspiciatis, consequuntur deserunt quo eveniet harum iste, vitae consectetur obcaecati nam
-                    rem
-                    enim
-                    vero. Quia, dolorem quaerat.</p>
-                <a href="#" class="btn btn-primary btn-sm">Lorem?</a>
-            </div>
-        </div>
+    <!-- Cards -->
+    <div class="container pt-4" id="card-container">
     </div>
 
+    <!-- Card Template -->
+    <template id="card-template">
+        <div class="card m-2 p-1">
+            <div class="card-id hidden"></div>
+            <div class="d-flex flex-row justify-content-between">
+                <h4 class="card-course-title text-antique fw-bold px-2">COURSE TITLE</h4>
+                <div class="dropdown">
+                    <button class="tag-list btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tags
+                    </button>
+                    <ul class="card-tags dropdown-menu">
+                        <div class="dynamic-tags">
+                        </div>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <button class="new-tag dropdown-item">Create new</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-assignment-title">ASSIGNMENT TITLE</h3>
+                <hr>
+                <h6 class="fw-bold">Assigned: <span class="card-assign-date fw-normal">ASSIGN DATE</span></h6>
+                <h6 class="fw-bold">Due: <span class="card-due-date fw-normal">DUE DATE</span></h6>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At magni et
+                    repellat
+                    commodi
+                    perspiciatis, consequuntur deserunt quo eveniet harum iste, vitae consectetur obcaecati nam
+                    rem
+                    enim
+                    vero. Quia, dolorem quaerat.</p>
+                <a href="#" class="btn btn-primary btn-sm">Lorem?</a>
+            </div>
+        </div>
+    </template>
 
-    <div class="dropdown-menu" id="contextMenu" role="menu"></div>
+    <!-- <div class="dropdown-menu" id="contextMenu" role="menu"></div> -->
 </body>
 
 </html>

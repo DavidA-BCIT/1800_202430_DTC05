@@ -38,6 +38,10 @@
     background-color: #A63A50;
 }
 
+.bg-greyed-out {
+    background-color: #c2c2c2;
+}
+
 .text-colour_secondary {
     color: #A63A50
 }
