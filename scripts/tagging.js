@@ -1,11 +1,13 @@
-var local_tags = ["Quiz", "Lab", "example_tag", "my_tag", "firestore_tag"];
-db.collection("cards").doc("all_tags").get("tags")
-    .then(doc => {
-        console.log(doc);
+var local_tags = []
 
-        local_tags = doc.data().tags;
-    });
-console.log(local_tags);
+function initialize_tags() {
+    db.collection("cards").doc("all_tags").get()
+        .then(doc => {
+            local_tags = doc.data().tags;
+            console.log("1");
+            update_tags();
+        });
+}
 
 const cardDataTemplate = {
     title: "template",
@@ -39,11 +41,10 @@ function createCardFromData(data) {
     newCard_elem.find(".card-id").text(data.id);
     local_tags.forEach(function (tag) {
         let tag_entry = `<li><button class="tag-item dropdown-item `;
-        if (data.cardTags.includes(tag)) { tag_entry += `fw-semibold bg-greyed-out`; console.log("cringe") };
+        if (data.cardTags.includes(tag)) { tag_entry += `fw-semibold bg-greyed-out`; };
         tag_entry += `">` + tag + `</button></li>`;
         newCard_elem.find(".dynamic-tags").prepend(tag_entry)
     })
-    console.log(newCard_elem);
     container.append(newCard_elem);
 }
 
@@ -100,11 +101,9 @@ function update_tags() {
             tag_list.prepend(tag_entry);
         })
     });
-    console.log("updated");
 }
 
 function prompt_new_tag() {
-    //console.log("called");
     let user_tag = window.prompt("Enter new tag:", "");
     let valid = validate_tag(user_tag);
     if (valid == 0) {
@@ -116,6 +115,7 @@ function prompt_new_tag() {
 
 function setup() {
     createExamples();
+    initialize_tags();
 
     $("body").on("click", ".new-tag", function (e) {
         prompt_new_tag();
@@ -130,8 +130,8 @@ function setup() {
             info.object.data("cardData").cardTags.push(info.tag);
         }
         update_tags();
-        console.log(info.object.data("cardData").cardTags)
     })
+
     console.log('setup');
 }
 $(document).ready(setup);
