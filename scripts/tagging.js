@@ -1,4 +1,13 @@
-const tags = ["Quiz", "Lab"];
+var local_tags = []
+
+function initialize_tags() {
+    db.collection("cards").doc("all_tags").get()
+        .then(doc => {
+            local_tags = doc.data().tags;
+            console.log("1");
+            update_tags();
+        });
+}
 
 const cardDataTemplate = {
     title: "template",
@@ -30,13 +39,12 @@ function createCardFromData(data) {
     newCard_elem.find(".card-assign-date").text(data.assignDate);
     newCard_elem.find(".card-due-date").text(data.dueDate);
     newCard_elem.find(".card-id").text(data.id);
-    tags.forEach(function (tag) {
+    local_tags.forEach(function (tag) {
         let tag_entry = `<li><button class="tag-item dropdown-item `;
-        if (data.cardTags.includes(tag)) { tag_entry += `fw-semibold bg-greyed-out`; console.log("cringe") };
+        if (data.cardTags.includes(tag)) { tag_entry += `fw-semibold bg-greyed-out`; };
         tag_entry += `">` + tag + `</button></li>`;
         newCard_elem.find(".dynamic-tags").prepend(tag_entry)
     })
-    console.log(newCard_elem);
     container.append(newCard_elem);
 }
 
@@ -50,7 +58,7 @@ function createExamples() {
 
 function openTags(event) {
     let tagList = "";
-    tags.forEach(function (item) {
+    local_tags.forEach(function (item) {
         tagList += `<button class="dropdown-item" type="button">` + item + `</button>`;
     });
     tagList += `<div class="dropdown-divider"></div> <button onClick="prompt_new_tag()" class="dropdown-item" type="button">Create new</button>`
@@ -70,33 +78,56 @@ function openTags(event) {
 function validate_tag(tag) {
     if (tag == "") return 1;
     if (tag == null) return 2;
-    for (let i = 0; i < tags.length; ++i) {
-        if (tag.toLowerCase() == tags[i].toLowerCase()) return 3;
+    for (let i = 0; i < local_tags.length; ++i) {
+        if (tag.toLowerCase() == local_tags[i].toLowerCase()) return 3;
     }
     return 0;
+}
+
+function add_tag(user_tag) {
+    local_tags.push(user_tag);
+    db.collection("cards").doc("all_tags").set({ tags: local_tags })
+    update_tags();
+}
+
+function delete_tag() {
+    let user_tag = window.prompt("Enter the tag you want to delete:", "");
+    let valid = validate_tag(user_tag);
+    if (valid == 0) { window.alert("No such tag exists!"); }
+    else if (valid == 1) { window.alert("No tag entered!"); }
+    else if (valid == 3) {
+        let i = local_tags.indexOf(user_tag);
+        local_tags.splice(i);
+        db.collection("cards").doc("all_tags").set({ tags: local_tags });
+        $(".dynamic-tags").each(function () {
+            const tag_list = $(this);
+            if (tag_list.closest(".card").data("cardData").cardTags.includes(user_tag)) {
+                let j = tag_list.closest(".card").data("cardData").cardTags.indexOf(user_tag);
+                tag_list.closest(".card").data("cardData").cardTags.splice(j);
+            }
+        });
+        update_tags();
+    }
 }
 
 function update_tags() {
     $(".dynamic-tags").each(function () {
         const tag_list = $(this);
         tag_list.empty();
-        tags.forEach(function (tag) {
+        local_tags.forEach(function (tag) {
             let tag_entry = `<li><button class="tag-item dropdown-item `;
             if (tag_list.closest(".card").data("cardData").cardTags.includes(tag)) tag_entry += `fw-semibold bg-greyed-out`;
             tag_entry += `">` + tag + `</button></li>`;
             tag_list.prepend(tag_entry);
         })
     });
-    console.log("updated");
 }
 
 function prompt_new_tag() {
-    //console.log("called");
     let user_tag = window.prompt("Enter new tag:", "");
     let valid = validate_tag(user_tag);
     if (valid == 0) {
-        tags.push(user_tag);
-        update_tags();
+        add_tag(user_tag);
     }
     else if (valid == 1) { window.alert("No tag entered!"); }
     else if (valid == 3) { window.alert("Tag already exists!") }
@@ -104,9 +135,13 @@ function prompt_new_tag() {
 
 function setup() {
     createExamples();
+    initialize_tags();
 
     $("body").on("click", ".new-tag", function (e) {
         prompt_new_tag();
+    })
+    $("body").on("click", ".delete-tag", function () {
+        delete_tag();
     })
     $("body").on("click", ".tag-item", function () {
         let info = { tag: $(this).text(), object: $(this).closest(".card") };
@@ -118,8 +153,8 @@ function setup() {
             info.object.data("cardData").cardTags.push(info.tag);
         }
         update_tags();
-        console.log(info.object.data("cardData").cardTags)
     })
+
     console.log('setup');
 }
 $(document).ready(setup);
