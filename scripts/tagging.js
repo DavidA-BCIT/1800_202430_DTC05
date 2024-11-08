@@ -90,6 +90,26 @@ function add_tag(user_tag) {
     update_tags();
 }
 
+function delete_tag() {
+    let user_tag = window.prompt("Enter the tag you want to delete:", "");
+    let valid = validate_tag(user_tag);
+    if (valid == 0) { window.alert("No such tag exists!"); }
+    else if (valid == 1) { window.alert("No tag entered!"); }
+    else if (valid == 3) {
+        let i = local_tags.indexOf(user_tag);
+        local_tags.splice(i);
+        db.collection("cards").doc("all_tags").set({ tags: local_tags });
+        $(".dynamic-tags").each(function () {
+            const tag_list = $(this);
+            if (tag_list.closest(".card").data("cardData").cardTags.includes(user_tag)) {
+                let j = tag_list.closest(".card").data("cardData").cardTags.indexOf(user_tag);
+                tag_list.closest(".card").data("cardData").cardTags.splice(j);
+            }
+        });
+        update_tags();
+    }
+}
+
 function update_tags() {
     $(".dynamic-tags").each(function () {
         const tag_list = $(this);
@@ -119,6 +139,9 @@ function setup() {
 
     $("body").on("click", ".new-tag", function (e) {
         prompt_new_tag();
+    })
+    $("body").on("click", ".delete-tag", function () {
+        delete_tag();
     })
     $("body").on("click", ".tag-item", function () {
         let info = { tag: $(this).text(), object: $(this).closest(".card") };
