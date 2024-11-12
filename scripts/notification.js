@@ -1,30 +1,19 @@
 
-const firebaseConfig = {
- apiKey: "AIzaSyAo-ZfjJIyK2lYNYscaPDWaly4-V0Qbby4",
- authDomain: "project-dtc05.firebaseapp.com",
- projectId: "project-dtc05",
- storageBucket: "project-dtc05.firebasestorage.app",
- messagingSenderId: "172960139284",
- appId: "1:172960139284:web:2cdc5646b51af558fdff01"
-};
+// Function to read the quote of the day from the Firestore "quotes" collection
+// Input param is the String representing the day of the week, aka, the document name
+function readQuote(day) {
+    db.collection("quotes").doc(day)                                                         //name of the collection and documents should matach excatly with what you have in Firestore
+        .onSnapshot(dayDoc => {                                                              //arrow notation
+            console.log("current document data: " + dayDoc.data());                          //.data() returns data object
+            document.getElementById("quote-goes-here").innerHTML = dayDoc.data().Quotes;      //using javascript to display the data on the right place
 
+            //Here are other ways to access key-value data fields
+            //$('#quote-goes-here').text(dayDoc.data().quote);         //using jquery object dot notation
+            //$("#quote-goes-here").text(dayDoc.data()["quote"]);      //using json object indexing
+            //document.querySelector("#quote-goes-here").innerHTML = dayDoc.data().quote;
 
-const app = firebase.initializeApp(firebaseConfig);
-const messaging = firebase.messaging();
-
-
-messaging.requestPermission()
-    .then(() => messaging.getToken())
-    .then((token) => {
-        console.log("Token received:", token);
-       
-    })
-    .catch((error) => {
-        console.error("Permission denied or error in getting token:", error);
-    });
-
-
-messaging.onMessage((payload) => {
-    console.log("Foreground message received:", payload);
-    alert(payload.notification.title + ": " + payload.notification.body);
-});
+        }, (error) => {
+            console.log ("Error calling onSnapshot", error);
+        });
+    }
+ readQuote("Friday");        //calling the function
