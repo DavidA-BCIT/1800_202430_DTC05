@@ -1,3 +1,4 @@
+var currentUser;
 
 
 function insertNameFromFirestore() {
