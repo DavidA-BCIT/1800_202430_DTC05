@@ -112,11 +112,14 @@ function delete_tag() {
 }
 
 function unhide_tags() {
-    behaviour = 0;
+    const container = $("#card-container");
+    container.children().each(function () {
+        let card = $(this);
+        card.show();
+    })
 }
 
 function hide_tags() {
-    behaviour = 1;
     const container = $("#card-container");
     container.children().each(function () {
         let card = $(this);
@@ -126,18 +129,23 @@ function hide_tags() {
                 card.hide();
                 break;
             }
-            else {
-                console.log(card_tags[i]);
-            }
         }
     })
 }
 
-function show_tags() {
+function show_only_tags() {
     const container = $("#card-container");
     container.children().each(function () {
         let card = $(this);
-        card.show();
+        card_tags = card.data("cardData").cardTags;
+        show = false;
+        for (let i = 0; i < card_tags.length; i++) {
+            if (selected_tags.includes(card_tags[i])) {
+                show = true;
+                break;
+            }
+        }
+        if (!show) { card.hide() }
     })
 }
 
