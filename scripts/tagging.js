@@ -134,6 +134,7 @@ function hide_tags() {
 }
 
 function show_only_tags() {
+    if (selected_tags.length == 0) return;
     const container = $("#card-container");
     container.children().each(function () {
         let card = $(this);
@@ -230,10 +231,12 @@ function setup() {
         unhide_tags();
     })
     $("body").on("click", ".tag-hide", function () {
+        unhide_tags();
         hide_tags();
     })
     $("body").on("click", ".tag-show-only", function () {
-        show_only_tags_tags();
+        unhide_tags();
+        show_only_tags();
     })
     $("body").on("change", ".tag-checkbox", function () {
         console.log("test!")
