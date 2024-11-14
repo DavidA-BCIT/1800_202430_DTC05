@@ -1,4 +1,5 @@
 var local_tags = []
+const selected_tags = ["Lab"]
 
 function initialize_tags() {
     db.collection("cards").doc("all_tags").get()
@@ -108,6 +109,54 @@ function delete_tag() {
         });
         update_tags();
     }
+}
+
+function unhide_tags() {
+    const container = $("#card-container");
+    container.children().each(function () {
+        let card = $(this);
+        card.show();
+    })
+}
+
+function hide_tags() {
+    const container = $("#card-container");
+    container.children().each(function () {
+        let card = $(this);
+        card_tags = card.data("cardData").cardTags;
+        for (let i = 0; i < card_tags.length; i++) {
+            if (selected_tags.includes(card_tags[i])) {
+                card.hide();
+                break;
+            }
+        }
+    })
+}
+
+function show_only_tags() {
+    const container = $("#card-container");
+    container.children().each(function () {
+        let card = $(this);
+        card_tags = card.data("cardData").cardTags;
+        show = false;
+        for (let i = 0; i < card_tags.length; i++) {
+            if (selected_tags.includes(card_tags[i])) {
+                show = true;
+                break;
+            }
+        }
+        if (!show) { card.hide() }
+    })
+}
+
+function select_tag(tag) {
+    if (validate_tag(tag) == 3) {
+        selected_tags.push(tag);
+    }
+}
+
+function clear_selected_tags() {
+    selected_tags.length = 0;
 }
 
 function update_tags() {
