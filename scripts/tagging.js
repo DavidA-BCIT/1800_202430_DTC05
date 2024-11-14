@@ -1,5 +1,5 @@
 var local_tags = []
-const selected_tags = ["Lab"]
+const selected_tags = []
 
 function initialize_tags() {
     db.collection("cards").doc("all_tags").get()
@@ -134,6 +134,7 @@ function hide_tags() {
 }
 
 function show_only_tags() {
+    if (selected_tags.length == 0) return;
     const container = $("#card-container");
     container.children().each(function () {
         let card = $(this);
@@ -149,6 +150,13 @@ function show_only_tags() {
     })
 }
 
+function unselect_tag(tag) {
+    if (selected_tags.includes(tag)) {
+        let i = selected_tags.indexOf(tag);
+        selected_tags.splice(i);
+    }
+}
+
 function select_tag(tag) {
     if (validate_tag(tag) == 3) {
         selected_tags.push(tag);
@@ -157,6 +165,21 @@ function select_tag(tag) {
 
 function clear_selected_tags() {
     selected_tags.length = 0;
+}
+
+function populate_tag_selector() {
+    const tags_controls = $("#tag-select-container");
+    tags_controls.empty();
+
+    console.log(tags_controls)
+    for (let i = 0; i < local_tags.length; i++) {
+        console.log(local_tags[i]);
+        let tag_html = $("#tag-select-template").html();
+        const tag_elem = $(tag_html);
+        tag_elem.find(".tag-text").text(local_tags[i]);
+        tag_elem.data("tag", local_tags[i]);
+        tags_controls.append(tag_elem);
+    }
 }
 
 function update_tags() {
@@ -170,6 +193,7 @@ function update_tags() {
             tag_list.prepend(tag_entry);
         })
     });
+    populate_tag_selector()
 }
 
 function prompt_new_tag() {
@@ -203,7 +227,27 @@ function setup() {
         }
         update_tags();
     })
-
+    $("body").on("click", ".tag-clear", function () {
+        unhide_tags();
+    })
+    $("body").on("click", ".tag-hide", function () {
+        unhide_tags();
+        hide_tags();
+    })
+    $("body").on("click", ".tag-show-only", function () {
+        unhide_tags();
+        show_only_tags();
+    })
+    $("body").on("change", ".tag-checkbox", function () {
+        console.log("test!")
+        const checkbox = $(this);
+        if (this.checked) {
+            select_tag(checkbox.closest(".tag-select").data("tag"));
+        }
+        else {
+            unselect_tag(checkbox.closest(".tag-select").data("tag"));
+        }
+    })
     console.log('setup');
 }
 $(document).ready(setup);

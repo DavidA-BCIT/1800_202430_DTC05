@@ -38,9 +38,37 @@
 <body class="">
     <!-- Demo -->
     <h1 class="bg-amaranth text-antique p-2 text-center mb-0">This page demonstrates the tagging feature</h1>
-    <!-- Cards -->
-    <div class="container pt-4" id="card-container">
+
+    <div class="grid px-2 pt-4 ">
+        <div class="row">
+            <!-- Tag controls -->
+            <div class="col container text-center" id="tag-controls">
+                <p class="fw-semibold">Tag controls</p>
+                <hr>
+                <button type="button" class="btn tag-clear">Clear</button>
+                <button type="button" class="btn tag-hide">Hide</button>
+                <button type="button" class="btn tag-show-only">Show only</button>
+                <hr>
+                <div class="container bg-amaranth py-1 px-2" id="tag-select-container">
+
+                </div>
+            </div>
+
+            <!-- Cards -->
+            <div class="container overflow-scroll col-10" id="card-container">
+            </div>
+        </div>
     </div>
+
+    <!-- Tag Selection Template-->
+    <template id="tag-select-template">
+        <div class="tag-select grid">
+            <div class="row bg-antique p-1 rounded">
+                <div class="tag-text col p-0 text-start">Example tag</div>
+                <input type="checkbox" class="tag-checkbox col p-0 m-2">
+            </div>
+        </div>
+    </template>
 
     <!-- Card Template -->
     <template id="card-template">
