@@ -66,12 +66,15 @@ function displayCardsDynamically(collection){
 
     db.collection(collection).get()
     .then(allCourses =>{
+        allCourses.forEach(doc =>{
         var title = doc.data().name;
         var details = doc.data().details;
         var crn = doc.data().crn;
         var location = doc.data().location
 
         let newcard = cardTemplate.contentEditable.cloneNode(true);
+
+            var docID = doc.id
 
         newcard.querySelector('.card-title').innerHTML = title;
         newcard.querySelector('.card-text').innerHTML = details;
