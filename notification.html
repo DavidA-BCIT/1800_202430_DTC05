@@ -28,7 +28,7 @@
     <!-- JQuery-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
 
     <!-- Tagging -->
     <script src="scripts/firebaseAPI_DTC_05.js"></script>
@@ -39,15 +39,8 @@
 
 <body class="min-h-screen flex flex-col justify-between">
 
-    <div>
-        <nav class=" flex flex-row justify-between bg-amaranth text-antique">
-            <button id="menuButton" class="text-2xl focus:outline-none m-10">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a href=""><i class="fas fa-home text-2xl  m-10 "></i></a>
-        </nav>
-    </div>
-
+    <!--Top Menu-->
+    <nav id="navbarPlaceholder"></nav>
 
 
     <div class="flex-grow ">
@@ -91,18 +84,10 @@
 
     </div>
 
+    <!--Bottom Navbar-->
+    <nav id="footerPlaceholder"></nav>
 
-
-
-
-
-
-
-    <nav class="fixed bottom-0 w-full bg-amaranth text-antique flex justify-around items-center py-4">
-        <a href="#"><i class="fas fa-calendar text-2xl"></i></a>
-        <a href="#"><i class="fas fa-cog text-2xl"></i></a>
-        <a href="#"><i class="fas fa-bell text-2xl"></i></a>
-    </nav>
+    <script src="scripts/skeleton.js"></script>
 
 </body>
 
