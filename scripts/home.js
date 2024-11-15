@@ -58,3 +58,28 @@ function writeCourses() {
     
 }
 
+function displayCardsDynamically(collection) {
+    let cardTemplate = document.getElementById("coursesCardTemplate");
+
+    db.collection(collection).get().then(allCourses => {
+        allCourses.forEach(doc => {
+            var title = doc.data().name;
+            var details = doc.data().details;
+            var crn = doc.data().crn;
+
+            // Clone the card template content
+            let newCard = cardTemplate.content.cloneNode(true);
+
+            // Fill in the template with Firestore data
+            newCard.querySelector('.card-title').innerHTML = title;
+            newCard.querySelector('.card-text').innerHTML = details;
+            newCard.querySelector('.card-lenght').innerHTML = crn;
+
+            // Append the new card to the page
+            document.body.appendChild(newCard);
+        });
+    });
+}
+
+// Call the function with your collection name
+displayCardsDynamically("courses");
