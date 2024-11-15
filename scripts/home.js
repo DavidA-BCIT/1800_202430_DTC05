@@ -58,20 +58,3 @@ function writeCourses() {
     
 }
 
-function displayCardsDynamically(collection){
-    let cardTemplate = document.getElementById("coursesCardTemplate");
-
-    db.collection(collection).get()
-    .then(allCourses =>{
-        var title = doc.data().name;
-        var details = doc.data().details;
-        var crn = doc.data().crn;
-        var location = doc.data().location
-
-        let newcard = cardTemplate.contentEditable.cloneNode(true);
-
-        newcard.querySelector('.card-title').innerHTML = title;
-        newcard.querySelector('.card-text').innerHTML = details;
-        newcard.querySelector('cart-text')
-    })
-}
