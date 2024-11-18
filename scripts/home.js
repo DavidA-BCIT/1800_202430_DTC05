@@ -35,6 +35,7 @@ function tryAddCourse(form) {
         name: newCourse_name,
         crn: newCourse_crn
     })
+    populateCards();
 }
 
 function populateCards() {
@@ -67,12 +68,22 @@ function populateCards() {
         })
 }
 
+function clearAddCourseForm(form) {
+    console.log("bp1");
+    form.find(".form-control").each(function (index) {
+        $(this).val("")
+    })
+}
+
 function setup() {
     hideDynamicElements();
     $('#addCourseForm').load('./text/add_course.html', function () {
         $("#submit-new-course").on("click", function () {
             const form = $(this).closest("#add-course-modal")
             tryAddCourse(form);
+        })
+        $("#add-course-modal").on("hidden.bs.modal", function () {
+            clearAddCourseForm($(this));
         })
     });
     authenticateUser();

@@ -40,29 +40,34 @@
     <!--Top Menu-->
     <nav id="navbarPlaceholder"></nav>
 
-    <!--Displayed if not logged in-->
-    <div id="not-logged-in" class="p-5">
-        <p>
-            <span class="fw-bold lead">You are not signed in!</span>
-            </br>
-            Login or create an account to start browsing courses.
-        </p>
-        <a type="button" class="btn btn-primary mt-4" href="login.html">Login</a>
-    </div>
+    <!--Messages and Buttons-->
+    <div class="px-5 py-3">
+        <!--Displayed if not logged in-->
+        <div id="not-logged-in" class="">
+            <p class="mb-3">
+                <span class="fw-bold lead">You are not signed in!</span>
+                </br>
+                Login or create an account to start browsing courses.
+            </p>
+            <a type="button" class="btn btn-primary" href="login.html">Login</a>
+        </div>
 
-    <button type="button" id="add-course-btn" class="btn btn-primary m-4" data-bs-toggle="modal"
-        data-bs-target="#add-course-modal">Add a course</button>
+        <!--Displayed if logged in but no courses-->
+        <div id="message-NoCourses" class="mb-3">
+            <span class="fw-bold lead">No courses!</span>
+            <p>You haven't added any courses yet. Press the 'Add a course' button below to get started.</p>
+        </div>
+
+        <!--Displayed if logged in-->
+        <button type="button" id="add-course-btn" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#add-course-modal">Add a course</button>
+    </div>
 
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
 
     <!--'Add Course' form-->
     <div id="addCourseForm"></div>
-
-    <div id="message-NoCourses" class="px-5">
-        <span class="fw-bold lead">No courses!</span>
-        <p>You haven't added any courses yet. Press the 'Add a course' button above to get started.</p>
-    </div>
 
     <div id="courseList" class="flex px-5 py-2">
 
