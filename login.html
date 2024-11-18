@@ -34,11 +34,6 @@
 </head>
 
 <body class="">
-    <!---------------------->
-    <!-- Your HTML layout -->
-    <!--------------------->
-
-
     <!-- Your Navbar -->
     <!--Bottom Navbar-->
     <nav id="navbarPlaceholder"></nav>
@@ -46,30 +41,24 @@
     <!-- Your body of your page -->
 
     <div class="text-center">
-        <h1 class="container-fluid p-2"> Login or register</h1>
-        <p class="lead"><span class="fw-bold">Enter your email below. </span>If your email is not associated with an
-            account, you will be
-            prompted
-            to
-            create an
-            account.</p>
+        <!-- <h1 class="container-fluid p-2"> Login or register</h1> -->
+        <p class="lead">
+            <span class="fw-bold">Enter your email below </span>
+            <br />
+            If your email is not associated with an account, you will be prompted to create an account.
+        </p>
     </div>
 
-    <div id="firebaseui-auth-container"></div>
+    <div id="firebaseui-auth-container" class="mt-5"></div>
     <div id="loader">Loading...</div>
 
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
 
-
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
+    <!--Scripts-->
     <script src="./scripts/firebaseAPI_DTC_05.js"></script>
-    <script src="./scripts/authentication.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <!-- Link to scripts of your own -->
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/authentication.js"></script>
 
 </body>
 
