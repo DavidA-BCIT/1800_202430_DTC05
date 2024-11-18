@@ -38,14 +38,13 @@ function tryAddCourse(form) {
 }
 
 function populateCards() {
-    const noCourseMessage = $("message-NoCourses");
+    const noCourseMessage = $("#message-NoCourses");
     noCourseMessage.hide()
     currentUser.collection("courses").get()
         .then(allCourses => {
-            if (allCourses) {
+            if (allCourses && !allCourses.empty) {
                 const courseTemplate = $("#courseListingTemplate");
                 const courseList = $("#courseList");
-
                 allCourses.forEach(course => {
                     const courseName = course.data().name;
                     const courseSubject = course.data().subject;
@@ -62,6 +61,7 @@ function populateCards() {
                 })
             }
             else {
+                console.log("no courses to show")
                 noCourseMessage.show();
             }
         })
