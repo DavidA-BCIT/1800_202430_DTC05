@@ -1,121 +1,81 @@
 var currentUser;
 
-
-function doAll() {
+function authenticateUser() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
-            console.log(currentUser);
-
-            // figure out what day of the week it is today
-            const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-            const d = new Date();
-            let day = weekday[d.getDay()];
-
-            // the following functions are always called when someone is logged in
-            readQuote(day);
-            insertNameFromFirestore();
-            displayCardsDynamically("hikes");
-        } else {
-            // No user is signed in.
-            console.log("No user is signed in");
-            window.location.href = "login.html";
+            console.log("Logged in as uid: " + user.uid)
+            $("#add-course-btn").show();
+            populateCards();
+            return true;
+        }
+        else {
+            console.log("Not logged in")
+            $("#not-logged-in").show();
+            return false;
         }
     });
 }
-doAll();
 
-function insertNameFromFirestore() {
-    currentUser.get().then(userDoc => {
-        //get the user name
-        var user_Name = userDoc.data().name;
-        console.log(user_Name);
-        $("#name-goes-here").text(user_Name); //jquery
-        // document.getElementByID("name-goes-here").innetText=user_Name;
+function hideDynamicElements() {
+    $("#not-logged-in").hide();
+    $("#add-course-btn").hide();
+    $("#message-NoCourses").hide();
+}
+
+function tryAddCourse(form) {
+    const newCourse_subject = $("#newCourse-subject").val();
+    const newCourse_number = $("#newCourse-number").val();
+    const newCourse_name = $("#newCourse-title").val();
+    const newCourse_crn = $("#newCourse-crn").val();
+
+    currentUser.collection("courses").doc(newCourse_subject + newCourse_number).set({
+        subject: newCourse_subject,
+        number: newCourse_number,
+        name: newCourse_name,
+        crn: newCourse_crn
     })
 }
 
-function readQuote(day) {
-    db.collection("quotes").doc(day)                                                         //name of the collection and documents should matach excatly with what you have in Firestore
-        .onSnapshot(dayDoc => {                                                              //arrow notation
-            console.log("inside");
-            console.log(dayDoc.date());
-            // console.log("current document data: " + dayDoc.data());                          //.data() returns data object
-            document.getElementById("quote-goes-here").innerHTML = dayDoc.data().quote;      //using javascript to display the data on the right place
+function populateCards() {
+    const noCourseMessage = $("message-NoCourses");
+    noCourseMessage.hide()
+    currentUser.collection("courses").get()
+        .then(allCourses => {
+            if (allCourses) {
+                const courseTemplate = $("#courseListingTemplate");
+                const courseList = $("#courseList");
 
-            //Here are other ways to access key-value data fields
-            //$('#quote-goes-here').text(dayDoc.data().quote);         //using jquery object dot notation
-            //$("#quote-goes-here").text(dayDoc.data()["quote"]);      //using json object indexing
-            //document.querySelector("#quote-goes-here").innerHTML = dayDoc.data().quote;
+                allCourses.forEach(course => {
+                    const courseName = course.data().name;
+                    const courseSubject = course.data().subject;
+                    const courseNumber = course.data().number;
+                    const courseCRN = course.data().crn;
 
-        }, (error) => {
-            console.log("Error calling onSnapshot", error);
-        });
+                    let newCard_html = courseTemplate.html();
+                    const newCard = $(newCard_html);
+                    newCard.find(".courseName").text(courseName);
+                    newCard.find(".courseCode").text(courseSubject + " " + courseNumber);
+                    newCard.find(".courseCRN").text(courseCRN);
+
+                    courseList.append(newCard);
+                })
+            }
+            else {
+                noCourseMessage.show();
+            }
+        })
 }
 
-function writeCourses() {
-    var coursesRef = db.collection("courses");
-
-    coursesRef.add({
-        name: "Comp 1510",
-        details: "Programming Methods.",
-        crn: "CRN 44913",
-        location:"Campuses: DTC & BBY",
-        last_updates: firebase.firebase.FieldValue.serverTimestamp()
-    })
-    coursesRef.add({
-        name: "Comp 1537",
-        details: "Web Development.",
-        crn: "CRN 46870",
-        location: "Campuses: DTC & BBY",
-        last_updates: firebase.firebase.FieldValue.serverTimestamp()
-    })
-    coursesRef.add({
-        name: "Comp 1800",
-        details: "Project 1.",
-        crn: "CRN 46874",
-        location: "Campuses: DTC & BBY",
-        last_updates: firebase.firebase.FieldValue.serverTimestamp()
-    })
-    coursesRef.add({
-        name: "Comp 1712",
-        details: "Business Analysis and System Design.",
-        crn: "CRN 45300",
-        location: "Campuses: DTC & BBY",
-        last_updates: firebase.firebase.FieldValue.serverTimestamp()
-    })
-    coursesRef.add({
-        name: "Comp 1100",
-        details: "CST Program Fundamentals.",
-        crn: "CRN 44910",
-        location: "Campuses: DTC & BBY",
-        last_updates: firebase.firebase.FieldValue.serverTimestamp()
-    })
-    
-}
-
-function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("coursesCardTemplate");
-
-    db.collection(collection).get().then(allCourses => {
-        allCourses.forEach(doc => {
-            var title = doc.data().name;
-            var details = doc.data().details;
-            var crn = doc.data().crn;
-
-            // Clone the card template content
-            let newCard = cardTemplate.content.cloneNode(true);
-
-            // Fill in the template with Firestore data
-            newCard.querySelector('.card-title').innerHTML = title;
-            newCard.querySelector('.card-text').innerHTML = details;
-            newCard.querySelector('.card-lenght').innerHTML = crn;
-
-            // Append the new card to the page
-            document.body.appendChild(newCard);
-        });
+function setup() {
+    hideDynamicElements();
+    $('#addCourseForm').load('./text/add_course.html', function () {
+        $("#submit-new-course").on("click", function () {
+            const form = $(this).closest("#add-course-modal")
+            tryAddCourse(form);
+        })
     });
+    authenticateUser();
 }
 
-// Call the function with your collection name
-displayCardsDynamically("courses");
+$(document).ready(setup())
