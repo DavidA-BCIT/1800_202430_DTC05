@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>DTC-05 Landing Page</title>
+    <title>Home</title>
     <meta name="comp1800 template" content="My 1800 App">
 
     <!-- Required meta tags -->
@@ -37,56 +37,34 @@
 </head>
 
 <body>
-
-    <!-- Your HTML layout -->
-
-
-    <!-- Your Navbar -->
-    <!-- our own navbar goes here -->
+    <!--Top Menu-->
     <nav id="navbarPlaceholder"></nav>
 
-    <!-- Your body of your page -->
-
-
-    <div class="text-md-start text-center">
-        <div class="container-fluid px-md-5 pt-md-3 pb-3 p-1 ">
-            <h1 class="display-4">Hello <span id="name-goes-here"></span>friend</h1>
-            <hr>
-            <p class="display-5 form-control text-center card-body ">Quote of the day: <span
-                    id="quote-goes-here"></span></p>
-            <br>
-        </div>
+    <!--Displayed if not logged in-->
+    <div id="not-logged-in" class="p-5">
+        <p>
+            <span class="fw-bold lead">You are not signed in!</span>
+            </br>
+            Login or create an account to start browsing courses.
+        </p>
+        <a type="button" class="btn btn-primary mt-4" href="login.html">Login</a>
     </div>
 
-    <template id="coursesCardTemplate">
-        <div class="row mt-4 flex mx-md-5">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-lenght">placeholder</p><br>
-                        <p class="card-text">Some quick text.</p>
-                        <a href="#" class="btn btn-primary">Check it out!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
+    <button type="button" id="add-course-btn" class="btn btn-primary m-4" data-bs-toggle="modal"
+        data-bs-target="#add-course-modal">Add a course</button>
 
-
-    <!-- Your footerzz -->
-    <!-- our own footer goes here-->
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
+
+    <!--'Add Course' form-->
+    <div id="addCourseForm"></div>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
     <script src="scripts/firebaseAPI_DTC_05.js"></script>
     <script src="scripts/skeleton.js"></script>
-    <!-- Link to scripts of your own -->
-    <script src="scripts/home.js"></script>
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="scripts/new_home.js"></script>
 
 </body>
 
