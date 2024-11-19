@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Contact Info</title>
+    <meta name="comp1800 template" content="My 1800 App">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap Library CSS CDN go here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+
+    <!-- Boostrap  and Firebase 8 Library related CSS, JS, JQuery go here -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <!-- Other libraries go here -->
+
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css">
+
+</head>
+
+<body>
+    <!-- Top Menu -->
+    <nav id="navbarPlaceholder"></nav>
+
+    <!--Content-->
+    <div class="p-5">
+        <form>
+            <fieldset class="mb-3" id="contactInfoFields" disabled>
+                <h1 class="mb-3">Instructor Contact Information:</h1>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="nameInput" class="form-control" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="emailInput" class="form-control" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label>Phone #</label>
+                    <input type="text" id="phoneInput" class="form-control" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label>Office Hours</label>
+                    <select id="" class="form-select" placeholder="">
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                    </select>
+                </div>
+            </fieldset>
+            <div class="d-flex justify-content-end mt-5">
+                <button type="button" class="btn btn-secondary" id="btn-edit">Edit</button>
+                <span style="width: 10px"></span>
+                <button type="button" class="btn btn-info" id="btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!--Bottom Navbar-->
+    <nav id="footerPlaceholder"></nav>
+
+
+    <!--Scripts-->
+    <script src="scripts/firebaseAPI_DTC_05.js"></script>
+    <script src="scripts/skeleton.js"></script>
+    <script src="scripts/contact.js"></script>
+
+</body>
+
+</html>
