@@ -36,6 +36,7 @@ function tryAddCourse(form) {
         crn: newCourse_crn
     })
     populateCards();
+    $("#close-modal").click();
 }
 
 function populateCards() {
@@ -44,8 +45,9 @@ function populateCards() {
     currentUser.collection("courses").get()
         .then(allCourses => {
             if (allCourses && !allCourses.empty) {
-                const courseTemplate = $("#courseListingTemplate");
                 const courseList = $("#courseList");
+                courseList.empty();
+                const courseTemplate = $("#courseListingTemplate");
                 allCourses.forEach(course => {
                     const courseName = course.data().name;
                     const courseSubject = course.data().subject;
