@@ -23,6 +23,17 @@ function hideDynamicElements() {
     $("#message-NoCourses").hide();
 }
 
+
+function makeBreadcrumb() {
+    const breadcrumb = $("#breadcrumbContent");
+    console.log(breadcrumb)
+    let breadcrumb_html = `<li class="breadcrumb-item active" aria-current="page">Courses</li>`
+    const new_breadcrumb = $(breadcrumb_html);
+
+    breadcrumb.append(new_breadcrumb)
+    console.log("breadcrumb baked")
+}
+
 function tryAddCourse(form) {
     const newCourse_subject = $("#newCourse-subject").val();
     const newCourse_number = $("#newCourse-number").val();
@@ -90,6 +101,10 @@ function setup() {
             clearAddCourseForm($(this));
         })
     });
+    $("#breadcrumbContent").on("ready", function () {
+        console.log("cringe")
+        makeBreadcrumb();
+    })
     authenticateUser();
 }
 

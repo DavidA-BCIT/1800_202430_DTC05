@@ -59,8 +59,16 @@ async function setClipboard(text) {
     await navigator.clipboard.write(data);
 }
 
+function makeBreadcrumb() {
+    let params = new URL(window.location.href);
+    let ID = params.searchParams.get("docID");
+    $("#breadcrumb-courseCode").text(ID);
+    $("#breadcrumb-courseCode").attr("href", "course.html?docID=" + ID);
+}
+
 function setup() {
     authenticateUser();
+    makeBreadcrumb();
     $("#btn-edit").on("click", function () {
         $("#contactInfoFields").prop("disabled", false)
     })

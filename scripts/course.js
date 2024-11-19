@@ -11,6 +11,7 @@ function linkButtons(docID) {
     let id = "?docID=" + docID;
     $("#btn-assignments").attr("href", "assignments.html" + id);
     $("#btn-contactInfo").attr("href", "contact.html" + id);
+    $("#breadcrumb-courseCode").text(docID);
 }
 function setup() {
     getCourseInfo();

@@ -26,7 +26,12 @@
 
 .text-antique {
     color: #F0E7D8;
-    /* Force antique white as background */
+    /* Force antique white as text */
+}
+
+.text-amaranth {
+    color: #A63A50;
+    /* Force amaranth purple as text */
 }
 
 .bg-info {
@@ -112,6 +117,7 @@ body {
     margin: 0 auto;
     /* Centers the circle horizontally */
 }
+
 .menu {
     display: none;
     /* Hide menu by default */
