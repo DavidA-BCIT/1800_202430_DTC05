@@ -1,3 +1,18 @@
+var currentUser;
+
+function authenticateUser() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid);
+            getCourseInfo();
+        }
+        else {
+            console.log("Not logged in!");
+            window.location.replace("login.html")
+        }
+    })
+}
+
 function getCourseInfo() {
     let params = new URL(window.location.href);
     let ID = params.searchParams.get("docID");
@@ -14,7 +29,7 @@ function linkButtons(docID) {
     $("#breadcrumb-courseCode").text(docID);
 }
 function setup() {
-    getCourseInfo();
+    authenticateUser();
 }
 
 $(document).ready(setup());

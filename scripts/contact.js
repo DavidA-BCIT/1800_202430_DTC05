@@ -9,6 +9,7 @@ function authenticateUser() {
         }
         else {
             console.log("Not logged in!");
+            window.location.replace("login.html")
         }
     })
 }
