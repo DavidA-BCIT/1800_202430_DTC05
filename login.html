@@ -40,18 +40,32 @@
 
     <!-- Your body of your page -->
 
-    <div class="text-center">
-        <!-- <h1 class="container-fluid p-2"> Login or register</h1> -->
-        <p class="lead">
-            <span class="fw-bold">Enter your email below </span>
-            <br />
-            If your email is not associated with an account, you will be prompted to create an account.
-        </p>
+    <div id="logged-in">
+        <div class="text-center">
+            <span class="fw-bold display-6">Already signed in!</span>
+            <p class="lead mt-3">
+                If you would like to sign into another account, press the <span class="fw-semibold">sign out
+                    button</span>
+                below. </br>
+                Otherwise, you can press the <span class="fw-semibold">home button</span> in the top right to go to your
+                course list.
+            </p>
+            <button class="btn btn-primary btn-lg mt-5" id="btn-signOut">Sign out</button>
+        </div>
     </div>
 
-    <div id="firebaseui-auth-container" class="mt-5"></div>
-    <div id="loader">Loading...</div>
+    <div id="not-logged-in">
+        <div class="text-center">
+            <p class="lead">
+                <span class="fw-bold">Enter your email below </span>
+                <br />
+                If your email is not associated with an account, you will be prompted to create an account.
+            </p>
+        </div>
 
+        <div id="firebaseui-auth-container" class="mt-5"></div>
+        <div id="loader">Loading...</div>
+    </div>
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
 

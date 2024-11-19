@@ -43,4 +43,29 @@ var uiConfig = {
     privacyPolicyUrl: '<your-privacy-policy-url>'
 };
 
-ui.start('#firebaseui-auth-container', uiConfig);
+function authenticateUser() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid); //global
+            console.log("Logged in as uid: " + user.uid);
+            $("#not-logged-in").hide();
+            return true;
+        }
+        else {
+            console.log("Not logged in")
+            $("#logged-in").hide();
+            ui.start('#firebaseui-auth-container', uiConfig);
+
+            return false;
+        }
+    });
+}
+
+function setup() {
+    authenticateUser();
+    $("#btn-signOut").on("click", function () {
+        firebase.auth().signOut();
+        location.reload();
+    })
+}
+$(document).ready(setup());
