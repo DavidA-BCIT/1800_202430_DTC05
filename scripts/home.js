@@ -60,6 +60,8 @@ function populateCards() {
                     newCard.find(".courseCode").text(courseSubject + " " + courseNumber);
                     newCard.find(".courseCRN").text(courseCRN);
 
+                    const docID = courseSubject + courseNumber;
+                    newCard.find(".stretched-link").attr("href", "course.html?docID=" + docID);
                     courseList.append(newCard);
                 })
             }
