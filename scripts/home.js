@@ -85,6 +85,47 @@ function tryAddCourse(form) {
 
 
 
+function populateCards() {
+    const noCourseMessage = $("#message-NoCourses");
+    noCourseMessage.hide();
+    currentUser.collection("courses").get()
+        .then(allCourses => {
+            if (allCourses && !allCourses.empty) {
+                const courseList = $("#courseList");
+                courseList.empty();
+                const courseTemplate = $("#courseListingTemplate");
+                allCourses.forEach(course => {
+                    const courseName = course.data().name;
+                    const courseSubject = course.data().subject;
+                    const courseNumber = course.data().number;
+                    const courseCRN = course.data().crn;
+
+                    // Clone the template and populate it
+                    let newCard_html = courseTemplate.html();
+                    const newCard = $(newCard_html);
+                    newCard.find(".courseName").text(courseName);
+                    newCard.find(".courseCode").text(`${courseSubject} ${courseNumber}`);
+                    newCard.find(".courseCRN").text(courseCRN);
+
+                    const docID = courseSubject + courseNumber;
+                    newCard.find(".stretched-link").attr("href", `course.html?docID=${docID}`);
+
+                    // Find the delete button and attach the event listener
+                    const deleteButton = newCard.find(".btn-delete");
+                    deleteButton.data("docID", docID); // Store the docID for the course
+                    deleteButton.on("click", function () {
+                        deleteCourse($(this).data("docID"));
+                    });
+
+                    // Append the card to the list
+                    courseList.append(newCard);
+                });
+            } else {
+                console.log("no courses to show");
+                noCourseMessage.show();
+            }
+        });
+}
 
 
 
