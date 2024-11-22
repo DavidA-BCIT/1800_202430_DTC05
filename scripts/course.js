@@ -13,6 +13,21 @@ function authenticateUser() {
     })
 }
 
+function loadWelcomeBanner() {
+    // Fetch the welcome banner template and insert it into the page
+    fetch('welcomeBanner.html')
+        .then(response => response.text())
+        .then(data => {
+            // Insert the banner at the top of the body
+            document.body.insertAdjacentHTML('afterbegin', data);
+        })
+        .catch(error => console.error('Error loading the welcome banner:', error));
+}
+
+// Call the function once the DOM is ready
+document.addEventListener("DOMContentLoaded", loadWelcomeBanner);
+
+
 function getCourseInfo() {
     let params = new URL(window.location.href);
     let ID = params.searchParams.get("docID");
@@ -28,6 +43,9 @@ function linkButtons(docID) {
     $("#btn-contactInfo").attr("href", "contact.html" + id);
     $("#breadcrumb-courseCode").text(docID);
 }
+
+
+
 function setup() {
     authenticateUser();
 }
