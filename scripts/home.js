@@ -149,6 +149,8 @@ function clearAddCourseForm(form) {
     })
 }
 
+
+
 function setup() {
     hideDynamicElements();
     $('#addCourseForm').load('./text/add_course.html', function () {

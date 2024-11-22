@@ -28,6 +28,9 @@ function linkButtons(docID) {
     $("#btn-contactInfo").attr("href", "contact.html" + id);
     $("#breadcrumb-courseCode").text(docID);
 }
+
+
+
 function setup() {
     authenticateUser();
 }
