@@ -57,14 +57,24 @@
         </nav>
     </div>
 
-    <div id="deleteMe" class="flex justify-content-center">
-        <p class="fw-bold">
-            Under construction!
-        </p>
+    <!--Messages and Button-->
+    <div class="px-5 py-3">
+        <!--Displayed if no assignments-->
+        <div id="message-noAssignments" class="mb-3">
+            <span class="fw-bold lead">No assignments!</span>
+            <p>You haven't added any assignments yet. Press the 'Add assignment' button below to get started.</p>
+        </div>
+
+        <!--Add assignment button-->
+        <button type="button" id="btn-addAssignment" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#modal-addAssignment">Add assignment</button>
     </div>
 
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
+
+    <!--'Add course form-->
+    <div id="addAssignmentForm"></div>
 
 
     <!--Scripts-->

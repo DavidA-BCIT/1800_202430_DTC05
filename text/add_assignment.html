@@ -4,44 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add course</title>
+    <title>Add assignment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <!-- Modal -->
-    <div class="modal fade" id="add-course-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="modal-addAssignment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a course</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add an assignment</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="newCourse-subject">Subject</label>
+                    <label for="newCourse-subject">Title</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="newCourse-subject" aria-describedby="basic-addon3"
-                            placeholder="COMP">
+                            placeholder="">
                     </div>
-                    <label for="newCourse-number">Course Number</label>
+                    <label for="newCourse-number">Link</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="newCourse-number" aria-describedby="basic-addon3"
-                            placeholder="1100">
+                            placeholder="">
                     </div>
-                    <label for="newCourse-title">Course Name</label>
+                    <label for="newCourse-title">Due Date</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="newCourse-title" aria-describedby="basic-addon3"
-                            placeholder="CST Program Fundamentals">
-                    </div>
-                    <label for="newCourse-crn">Course Reference Number (CRN)</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="newCourse-crn" aria-describedby="basic-addon3"
-                            placeholder="44910">
+                            placeholder="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        id="close-modal">Cancel</button>
                     <button type="button" class="btn btn-primary" id="submit-new-course">Submit</button>
                 </div>
             </div>
