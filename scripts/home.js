@@ -101,6 +101,7 @@ function populateCards() {
 
                     let newCard_html = courseTemplate.html();
                     const newCard = $(newCard_html);
+                    newCard.addClass = ("card-item");
                     newCard.find(".courseName").text(courseName);
                     newCard.find(".courseCode").text(`${courseSubject} ${courseNumber}`);
                     newCard.find(".courseCRN").text(courseCRN);
@@ -113,6 +114,7 @@ function populateCards() {
                     deleteButton.data("docID", docID); // Store the docID for the course
                     deleteButton.on("click", function () {
                         deleteCourse($(this).data("docID"));
+                    deleteButton.addClass = ("btn-primary")
                     });
 
 
@@ -149,7 +151,22 @@ function clearAddCourseForm(form) {
     })
 }
 
+function handleWelcomeBanner() {
+    firebase.auth().onAuthStateChanged(user => {
+        const welcomeBanner = $("#welcome-banner");
+        const loginButton = $("#btn-login");
 
+        if (user) {
+            // User is logged in
+            loginButton.hide(); // Hide the login/signup button
+            welcomeBanner.prependTo("body"); // Move the banner to the top of the page
+        } else {
+            // User is not logged in
+            loginButton.show(); // Show the login/signup button
+            welcomeBanner.prependTo("body"); // Ensure the banner remains at the top
+        }
+    });
+}
 
 function setup() {
     hideDynamicElements();
