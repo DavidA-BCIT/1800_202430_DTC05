@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamburger Menu Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Template Page</title>
+    <meta name="comp1800 template" content="My 1800 App">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -32,58 +29,52 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
+    <!-- Other libraries go here -->
+
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
-    <style>
-        /* Basic styling */
-        .menu {
-            display: none;
-            /* Hide menu by default */
-            position: absolute;
-            top: 60px;
-            left: 10px;
-            background-color: #fff;
-            padding: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-        }
 
-        .menu button {
-            display: block;
-            padding: 30px;
-            margin: 5px 0;
-            width: 100%;
-            background-color: beige;
-            color: darkred;
-            border: none;
-            cursor: pointer;
-        }
-
-        .menu button:hover {
-            background-color: beige;
-        }
-    </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between">
+<body>
 
+    <!--Top Menu-->
     <nav id="navbarPlaceholder"></nav>
 
-    <div class="flex-grow">
-        <h1 class="text-center mt-10"></h1>
-        <p class="text-center mt-4">This is the main content of the page.</p>
-    </div>
+    <img src="" alt="">
 
-    <nav class="fixed bottom-0 w-full bg-amaranth text-antique flex justify-around items-center py-4">
-        <a href="#"><i class="fas fa-calendar text-2xl"></i></a>
-        <a href="#"><i class="fas fa-cog text-2xl"></i></a>
-        <a href="notification.html"><i class="fas fa-bell text-2xl"></i></a>
-    </nav>
+<div class="p-5 m-5 gap-10">
+    <img class="mx-auto size-32" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+    <form action="">
+        <label for="First Name">First Name</label>
+        <br>
+        <input type="text">
+        <br>
 
-    <div id="result"></div>
+        <label for="Last Name">Last Name</label>
+        <br>
+        <input type="text">
+        <br>
 
+        <label for="Program">program</label>
+        <br>
+        <input type="text">
+        <br>
+
+        <label for="Email Address">Email Address</label>
+        <br>
+        <input type="email adress">
+        <br>
+    </form>
+</div>
+
+
+   
+
+    <!-- Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
 
+    <!--Scripts-->
     <script src="scripts/firebaseAPI_DTC_05.js"></script>
     <script src="scripts/skeleton.js"></script>
 
