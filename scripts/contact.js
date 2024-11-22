@@ -51,6 +51,7 @@ function setContactInfo() {
         contact_email: $("#emailInput").val(),
         contact_phone: $("#phoneInput").val()
     })
+    $("#confirmPopup").toast("show");
 }
 
 async function setClipboard(text) {
@@ -70,11 +71,7 @@ function makeBreadcrumb() {
 function setup() {
     authenticateUser();
     makeBreadcrumb();
-    $("#btn-edit").on("click", function () {
-        $("#contactInfoFields").prop("disabled", false)
-    })
     $("#btn-save").on("click", function () {
-        $("#contactInfoFields").prop("disabled", true)
         setContactInfo();
     })
     $(".btn-clipboard").on("click", function () {

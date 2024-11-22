@@ -70,6 +70,10 @@
         <!--Displayed if logged in-->
         <button type="button" id="add-course-btn" class="btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#add-course-modal">Add a course</button>
+
+        <!-- Displayed if logged in
+        <a type="button" id="log-out-btn" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#add-course-modal">Log out</a> -->
     </div>
 
     <!--Bottom Navbar-->
@@ -78,12 +82,12 @@
     <!--'Add Course' form-->
     <div id="addCourseForm"></div>
 
-    <div id="courseList" class="flex flex-wrap px-5 py-2 justify-content-between">
+    <div id="courseList" class="flex flex-wrap px-5 py-2">
 
     </div>
 
     <template id="courseListingTemplate">
-        <div class="courseListing card p-1 my-2 z-0">
+        <div class="courseListing card p-1 my-2 mx-4 z-0">
             <p class="courseName fw-semibold fs-4 p-2 text-antique">COURSE NAME</p>
             <div class="card-body ptx-2">
                 <p class="courseCode fs-5">COURSE CODE</p>

@@ -61,7 +61,7 @@
     <div class="p-5">
         <h2 class="mb-3 fw-bold lead">Instructor Contact Information:</h2>
         <form>
-            <fieldset class="mb-3" id="contactInfoFields" disabled>
+            <fieldset class="mb-3" id="contactInfoFields">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" id="nameInput" class="form-control" placeholder="">
@@ -85,14 +85,27 @@
                     </select>
                 </div>
             </fieldset>
-            <div class="d-flex justify-content-end mt-5">
-                <button type="button" class="btn btn-secondary" id="btn-edit">Edit</button>
-                <span style="width: 10px"></span>
-                <button type="button" class="btn btn-info" id="btn-save">Save</button>
+            <div class="d-flex justify-content-start mt-5">
+                <button type="button" class="btn btn-primary" id="btn-save">Save</button>
             </div>
         </form>
     </div>
 
+    <!--Confirmation message-->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast align-items-center" id="confirmPopup" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Contact info saved!
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Hidden button-->
+    <button class="hidden" id="createConfirmPopup" data-bs-toggle="modal" data-bs-target="#confirmPopup"></button>
 
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
