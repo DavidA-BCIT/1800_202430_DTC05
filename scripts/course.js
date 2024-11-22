@@ -13,6 +13,8 @@ function authenticateUser() {
     })
 }
 
+
+
 function getCourseInfo() {
     let params = new URL(window.location.href);
     let ID = params.searchParams.get("docID");
@@ -29,20 +31,6 @@ function linkButtons(docID) {
     $("#breadcrumb-courseCode").text(docID);
 }
 
-function handleWelcomeBanner() {
-    firebase.auth().onAuthStateChanged(user => {
-        const welcomeBanner = $("#welcome-banner");
-        const loginButton = $("#btn-login");
-
-        if (user) {
-            loginButton.hide(); 
-            welcomeBanner.prependTo("body"); 
-        } else {
-            loginButton.show(); 
-            welcomeBanner.prependTo("body"); 
-        }
-    });
-}
 
 
 function setup() {

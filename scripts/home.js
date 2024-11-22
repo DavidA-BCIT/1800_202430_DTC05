@@ -1,5 +1,23 @@
 var currentUser;
 
+// Function to initialize navbar behavior
+function initializeNavbar() {
+    const menuButton = document.getElementById("menuButton");
+    const menu = document.getElementById("menu");
+
+    // Toggle the visibility of the menu
+    if (menuButton && menu) {
+        menuButton.addEventListener("click", () => {
+            menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
+        });
+    }
+}
+
+// Load the navbar when the page loads
+document.addEventListener("DOMContentLoaded", loadNavbar);
+
+
+
 function authenticateUser() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -150,22 +168,6 @@ function clearAddCourseForm(form) {
     })
 }
 
-function handleWelcomeBanner() {
-    firebase.auth().onAuthStateChanged(user => {
-        const welcomeBanner = $("#welcome-banner");
-        const loginButton = $("#btn-login");
-
-        if (user) {
-            // User is logged in
-            loginButton.hide(); // Hide the login/signup button
-            welcomeBanner.prependTo("body"); // Move the banner to the top of the page
-        } else {
-            // User is not logged in
-            loginButton.show(); // Show the login/signup button
-            welcomeBanner.prependTo("body"); // Ensure the banner remains at the top
-        }
-    });
-}
 
 function setup() {
     hideDynamicElements();
