@@ -65,23 +65,7 @@ function populateCards() {
                     const courseNumber = course.data().number;
                     const courseCRN = course.data().crn;
 
-                    let newCard_html = courseTemplate.html();
-                    const newCard = $(newCard_html);
-                    newCard.find(".courseName").text(courseName);
-                    newCard.find(".courseCode").text(courseSubject + " " + courseNumber);
-                    newCard.find(".courseCRN").text(courseCRN);
 
-                    const docID = courseSubject + courseNumber;
-                    newCard.find(".stretched-link").attr("href", "course.html?docID=" + docID);
-                    courseList.append(newCard);
-                })
-            }
-            else {
-                console.log("no courses to show")
-                noCourseMessage.show();
-            }
-        })
-}
 
 function clearAddCourseForm(form) {
     console.log("bp1");
