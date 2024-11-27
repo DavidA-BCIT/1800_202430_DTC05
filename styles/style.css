@@ -144,3 +144,27 @@ body {
 .menu button:hover {
     background-color: beige;
 }
+
+/* Themes */
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark-theme {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* Layouts */
+.grid-layout .course-card {
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+}
+
+.list-layout .course-card {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+}

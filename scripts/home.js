@@ -7,6 +7,17 @@ function authenticateUser() {
             console.log("Logged in as uid: " + user.uid)
             $("#add-course-btn").show();
             populateCards();
+
+            // Fetch and apply settings
+            currentUser.get().then(doc => {
+                if (doc.exists) {
+                    const userData = doc.data();
+                    const settings = userData.settings || {};
+                    const theme = settings.theme || "light"; // Default theme
+                    const layout = settings.layout || "grid"; // Default layout
+                    applyUserSettings(theme, layout);
+                }
+            });
             return true;
         }
         else {
@@ -16,6 +27,25 @@ function authenticateUser() {
         }
     });
 }
+
+// Define setting function
+function applyUserSettings(theme, layout) {
+    // Apply theme
+    if (theme === "dark") {
+        $("body").addClass("dark-theme").removeClass("light-theme");
+    } else {
+        $("body").addClass("light-theme").removeClass("dark-theme");
+    }
+
+    // Apply layout
+    const courseList = $("#courseList");
+    if (layout === "list") {
+        courseList.addClass("list-layout").removeClass("grid-layout");
+    } else {
+        courseList.addClass("grid-layout").removeClass("list-layout");
+    }
+}
+
 
 function hideDynamicElements() {
     $("#not-logged-in").hide();
@@ -105,6 +135,30 @@ function setup() {
         console.log("cringe")
         makeBreadcrumb();
     })
+    // Show settings modal
+    $("#settings-btn").on("click", function () {
+        $("#settings-modal").modal("show");
+    });
+
+    // Save settings and apply changes
+    $("#save-settings").on("click", function () {
+        const selectedTheme = $("#theme").val();
+        const selectedLayout = $("#layout").val();
+
+        // Save user preferences to Firestore
+        currentUser.update({
+            settings: {
+                theme: selectedTheme,
+                layout: selectedLayout
+            }
+        }).then(() => {
+            console.log("Settings saved successfully");
+            applyUserSettings(selectedTheme, selectedLayout);
+            $("#settings-modal").modal("hide");
+        }).catch(error => {
+            console.error("Error saving settings:", error);
+        });
+    });
     authenticateUser();
 }
 
