@@ -42,8 +42,48 @@
     <nav id="navbarPlaceholder"></nav>
 
     <!--Breadcrumb-->
-    <div class="justify-content-center flex bg-amaranth text-antique lead">
-        <nav id="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="p-1">
+
+    <!-- Settings Button -->
+    <button id="settings-btn" class="btn btn-primary">Settings</button>
+    
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="settings-form">
+                        <div class="form-group">
+                            <label for="theme">Select Theme:</label>
+                            <select id="theme" class="form-control">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="layout">Page Layout:</label>
+                            <select id="layout" class="form-control">
+                                <option value="grid">Grid</option>
+                                <option value="list">List</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="save-settings">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="justify-content-center flex bg-amaranth text-antique lead"> -->
+        <!-- <nav id="breadcrumb" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="p-1">
             <ol id="breadcrumbContent" class="breadcrumb fw-bold">
                 <li class="breadcrumb-item" aria-current="page" class=""><a href="home.html"
                         class="fw-medium ">Courses</a>
@@ -58,7 +98,7 @@
         <p class="fw-bold">
             Under construction!
         </p>
-    </div>
+    </div> -->
     <!-- Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
 
