@@ -70,12 +70,26 @@
             data-bs-target="#modal-addAssignment">Add assignment</button>
     </div>
 
+    <!--List of Assignments-->
+    <div id="assignmentList" class="flex flex-wrap px-5 py-2"></div>
+
     <!--Bottom Navbar-->
     <nav id="footerPlaceholder"></nav>
 
     <!--'Add course form-->
     <div id="addAssignmentForm"></div>
 
+
+    <template id="assignmentListingTemplate">
+        <div class="assignmentListing card p-1 my-2 mx-4 z-0">
+            <p class="assignmentName fw-semibold fs-4 p-2 text-antique">ASSIGNMENT NAME</p>
+            <div class="card-body ptx-2">
+                <p class="assignmentLink fs-5">ASSIGNMENT LINK</p>
+                <p class="assignmentDueDate fw-light">DUE DATE</p>
+                <a href="#" class="btn btn-secondary stretched-link">Course page</a>
+            </div>
+        </div>
+    </template>
 
     <!--Scripts-->
     <script src="scripts/firebaseAPI_DTC_05.js"></script>

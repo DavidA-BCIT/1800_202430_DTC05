@@ -5,6 +5,7 @@ function authenticateUser() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid);
+            populateCards();
         }
         else {
             console.log("Not logged in!");
@@ -37,8 +38,45 @@ function tryAddAssignment(form) {
     $("#close-modal").click();
 }
 
+function populateCards() {
+    let params = new URL(window.location.href);
+    let ID = params.searchParams.get("docID");
+
+    const noAssignmentMessage = $("#message-noAssignments");
+    noAssignmentMessage.hide()
+
+    courses = currentUser.collection("courses").doc(ID);
+    courses.collection("assignments").get()
+        .then(allCourses => {
+            if (allCourses && !allCourses.empty) {
+                const courseList = $("#assignmentList");
+                courseList.empty();
+                const courseTemplate = $("#assignmentListingTemplate");
+                allCourses.forEach(course => {
+                    const courseName = course.data().title;
+                    console.log(courseName)
+                    const courseSubject = course.data().link;
+                    const courseNumber = course.data().dueDate;
+
+                    let newCard_html = courseTemplate.html();
+                    const newCard = $(newCard_html);
+                    newCard.find(".assignmentName").text(courseName);
+                    newCard.find(".assignmentLink").text(courseSubject);
+                    newCard.find(".assignmentDueDate").text(courseNumber);
+
+                    
+                    courseList.append(newCard);
+                })
+            }
+            else {
+                console.log("no courses to show")
+                noAssignmentMessage.show();
+            }
+        })
+}
+
 function hideDynamicUI() {
-    // $("#message-noAssignments").hide();
+    $("#message-noAssignments").hide();
 }
 
 function clearAddAssignmentForm(form) {
