@@ -1,4 +1,5 @@
 var currentUser;
+var currentCourse;
 
 function authenticateUser() {
     firebase.auth().onAuthStateChanged(user => {
@@ -19,8 +20,20 @@ function makeBreadcrumb() {
     $("#breadcrumb-courseCode").attr("href", "course.html?docID=" + ID);
 }
 
-function tryAddCourse(form) {
+function tryAddAssignment(form) {
+    const newAssignment_title = $("#newAssignment-title").val();
+    const newAssignment_link = $("#newAssignment-link").val();
+    const newAssignment_dueDate = $("#newAssignment-dueDate").val();
 
+    let params = new URL(window.location.href);
+    let ID = params.searchParams.get("docID");
+
+    test = currentUser.collection("courses").doc(ID);
+    test.collection("assignments").doc(newAssignment_title).set({
+        title: newAssignment_title,
+        link: newAssignment_link,
+        dueDate: newAssignment_dueDate
+    })
 }
 
 function hideDynamicUI() {
@@ -32,7 +45,10 @@ function setup() {
     authenticateUser();
     makeBreadcrumb();
     $('#addAssignmentForm').load('./text/add_assignment.html', function () {
-        console.log("loaded!")
+        $("#submit-newAssignment").on("click", function () {
+            const form = $(this).closest("#add-course-modal")
+            tryAddAssignment(form);
+        })
     })
 }
 
