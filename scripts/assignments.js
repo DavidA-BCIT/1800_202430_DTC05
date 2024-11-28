@@ -35,6 +35,7 @@ function tryAddAssignment(form) {
         link: newAssignment_link,
         dueDate: newAssignment_dueDate
     })
+    populateCards();
     $("#close-modal").click();
 }
 
