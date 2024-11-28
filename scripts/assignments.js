@@ -34,10 +34,17 @@ function tryAddAssignment(form) {
         link: newAssignment_link,
         dueDate: newAssignment_dueDate
     })
+    $("#close-modal").click();
 }
 
 function hideDynamicUI() {
     // $("#message-noAssignments").hide();
+}
+
+function clearAddAssignmentForm(form) {
+    form.find(".form-control").each(function (index) {
+        $(this).val("")
+    })
 }
 
 function setup() {
@@ -48,6 +55,9 @@ function setup() {
         $("#submit-newAssignment").on("click", function () {
             const form = $(this).closest("#add-course-modal")
             tryAddAssignment(form);
+        })
+        $("#modal-addAssignment").on("hidden.bs.modal", function () {
+            clearAddAssignmentForm($(this));
         })
     })
 }
