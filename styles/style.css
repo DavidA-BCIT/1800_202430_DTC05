@@ -168,3 +168,7 @@ body.dark-theme {
     width: 100%;
     margin: 5px 0;
 }
+
+#settings-modal {
+    transition: opacity 0.3s ease;
+}
