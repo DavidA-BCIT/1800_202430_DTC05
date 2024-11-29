@@ -1,4 +1,31 @@
-var currentUser;
+let currentUser;
+
+function globalSetup() {
+    // Show settings modal when the settings button is clicked
+    $("#settings-btn").on("click", function () {
+        $("#settings-modal").modal("show");
+    });
+
+    // Save settings and apply changes
+    $("#save-settings").on("click", function () {
+        const selectedTheme = $("#theme").val();
+        const selectedLayout = $("#layout").val();
+
+        // Save user preferences to Firestore
+        currentUser.update({
+            settings: {
+                theme: selectedTheme,
+                layout: selectedLayout
+            }
+        }).then(() => {
+            console.log("Settings saved successfully");
+            applyUserSettings(selectedTheme, selectedLayout);
+            $("#settings-modal").modal("hide");
+        }).catch(error => {
+            console.error("Error saving settings:", error);
+        });
+    });
+}
 
 // Define setting function
 function applyUserSettings(theme, layout) {
@@ -24,8 +51,8 @@ function authenticateUser() {
             currentUser = db.collection("users").doc(user.uid); //global
             console.log("Logged in as uid: " + user.uid)
             
-            
-            
+            globalSetup(); // Initialize global settings
+
             $("#add-course-btn").show();
             populateCards();
 
