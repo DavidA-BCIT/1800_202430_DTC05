@@ -1,10 +1,31 @@
 var currentUser;
 
+// Define setting function
+function applyUserSettings(theme, layout) {
+    // Apply theme
+    if (theme === "dark") {
+        $("body").addClass("dark-theme").removeClass("light-theme");
+    } else {
+        $("body").addClass("light-theme").removeClass("dark-theme");
+    }
+
+    // Apply layout
+    const courseList = $("#courseList");
+    if (layout === "list") {
+        courseList.addClass("list-layout").removeClass("grid-layout");
+    } else {
+        courseList.addClass("grid-layout").removeClass("list-layout");
+    }
+}
+
 function authenticateUser() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
             console.log("Logged in as uid: " + user.uid)
+            
+            
+            
             $("#add-course-btn").show();
             populateCards();
 
@@ -28,23 +49,6 @@ function authenticateUser() {
     });
 }
 
-// Define setting function
-function applyUserSettings(theme, layout) {
-    // Apply theme
-    if (theme === "dark") {
-        $("body").addClass("dark-theme").removeClass("light-theme");
-    } else {
-        $("body").addClass("light-theme").removeClass("dark-theme");
-    }
-
-    // Apply layout
-    const courseList = $("#courseList");
-    if (layout === "list") {
-        courseList.addClass("list-layout").removeClass("grid-layout");
-    } else {
-        courseList.addClass("grid-layout").removeClass("list-layout");
-    }
-}
 
 
 function hideDynamicElements() {
