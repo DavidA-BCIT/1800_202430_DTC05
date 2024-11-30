@@ -143,7 +143,7 @@ function populateCards() {
             }
         })
 }
-
+$(document).ready(() => {populateCards()})
 
 function clearAddCourseForm(form) {
     console.log("bp1");
