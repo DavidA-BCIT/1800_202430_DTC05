@@ -1,7 +1,5 @@
 let currentUser;
 
-let currentUser;
-
 function globalSetup() {
     // Show settings modal when the settings button is clicked
     $("#settings-btn").on("click", function () {
