@@ -1,4 +1,3 @@
-var currentUser;
 var course;
 
 function authenticateUser() {
