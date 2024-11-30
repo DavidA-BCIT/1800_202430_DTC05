@@ -144,6 +144,7 @@ function populateCards() {
         })
 }
 
+
 function clearAddCourseForm(form) {
     console.log("bp1");
     form.find(".form-control").each(function (index) {
