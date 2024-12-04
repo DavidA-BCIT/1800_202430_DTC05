@@ -1,10 +1,58 @@
-var currentUser;
+let currentUser;
+
+function globalSetup() {
+    // Show settings modal when the settings button is clicked
+    $("#settings-btn").on("click", function () {
+        $("#settings-modal").modal("show");
+    });
+
+    // Save settings and apply changes
+    $("#save-settings").on("click", function () {
+        const selectedTheme = $("#theme").val();
+        const selectedLayout = $("#layout").val();
+
+        // Save user preferences to Firestore
+        currentUser.update({
+            settings: {
+                theme: selectedTheme,
+                layout: selectedLayout
+            }
+        }).then(() => {
+            console.log("Settings saved successfully");
+            applyUserSettings(selectedTheme, selectedLayout);
+            $("#settings-modal").modal("hide");
+        }).catch(error => {
+            console.error("Error saving settings:", error);
+        });
+    });
+}
+
+// Define setting function
+function applyUserSettings(theme, layout) {
+    // Apply theme
+    if (theme === "dark") {
+        $("body").addClass("dark-theme").removeClass("light-theme");
+    } else {
+        $("body").addClass("light-theme").removeClass("dark-theme");
+    }
+
+    // Apply layout
+    const courseList = $("#courseList");
+    if (layout === "list") {
+        courseList.addClass("list-layout").removeClass("grid-layout");
+    } else {
+        courseList.addClass("grid-layout").removeClass("list-layout");
+    }
+}
 
 function authenticateUser() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid); //global
             console.log("Logged in as uid: " + user.uid)
+            
+            globalSetup(); // Initialize global settings
+
             $("#add-course-btn").show();
             populateCards();
 
@@ -27,24 +75,7 @@ function authenticateUser() {
         }
     });
 }
-
-// Define setting function
-function applyUserSettings(theme, layout) {
-    // Apply theme
-    if (theme === "dark") {
-        $("body").addClass("dark-theme").removeClass("light-theme");
-    } else {
-        $("body").addClass("light-theme").removeClass("dark-theme");
-    }
-
-    // Apply layout
-    const courseList = $("#courseList");
-    if (layout === "list") {
-        courseList.addClass("list-layout").removeClass("grid-layout");
-    } else {
-        courseList.addClass("grid-layout").removeClass("list-layout");
-    }
-}
+$(document).ready(() => {authenticateUser()})
 
 
 function hideDynamicElements() {
@@ -112,6 +143,7 @@ function populateCards() {
             }
         })
 }
+$(document).ready(() => {populateCards()})
 
 function clearAddCourseForm(form) {
     console.log("bp1");
